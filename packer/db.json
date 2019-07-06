@@ -1,0 +1,35 @@
+{
+    "variables": {
+        "project_id": "",
+        "source_image_family": "",
+        "ssh_username": "",
+        "zone": "",
+        "machine_type": ""
+    },
+
+    "builders": [
+        {
+            "type": "googlecompute",
+            "project_id": "{{user `project_id`}}",
+            "image_name": "app-{{timestamp}}",
+            "image_family": "app",
+            "source_image_family": "{{user `source_image_family`}}",
+            "zone": "{{user `zone`}}",
+            "ssh_username": "{{user `ssh_username`}}",
+            "machine_type": "{{user `machine_type`}}"
+        }
+    ],
+
+    "provisioners": [
+        {
+            "type": "shell",
+            "script": "scripts/install_mongodb.sh",
+            "execute_command": "sudo {{.Path}}"
+        },
+        {
+            "type": "shell",
+            "script": "scripts/install_rabbitmq.sh",
+            "execute_command": "sudo {{.Path}}"
+        }
+    ]
+}
