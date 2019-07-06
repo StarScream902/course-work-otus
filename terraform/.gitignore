@@ -1,0 +1,8 @@
+*.swp
+.vscode/
+# Terraform
+*.tfstate
+*.tfstate.*.backup
+*.tfstate.backup
+*.tfvars
+.terraform/
