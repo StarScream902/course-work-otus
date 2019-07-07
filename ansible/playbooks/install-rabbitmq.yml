@@ -1,0 +1,41 @@
+---
+- name: Install RabbitMQ
+  hosts: all
+  become: true
+
+  vars:
+    ansible_python_interpreter: /usr/bin/python3
+
+  tasks:
+
+  - name: Add RabbitMQ ppa key
+    sudo: yes
+    apt_key:
+      keyserver: hkps.pool.sks-keyservers.net
+      id: "0x6B73A36E6026DFCA"
+      state: present
+
+  - name: Install apt-transport-https
+    sudo: yes
+    apt: 
+      name: apt-transport-https
+      state: latest
+      update_cache: yes
+
+  - name: Add RabbitMQ sources list
+    sudo: yes
+    blockinfile:
+      path: /etc/apt/sources.list.d/bintray.erlang.list
+      state: present
+      create: yes
+      block: |
+        deb https://dl.bintray.com/rabbitmq-erlang/debian bionic erlang-21.x
+        deb https://dl.bintray.com/rabbitmq/debian bionic main
+
+
+  - name: Install RabbitMQ
+    sudo: yes
+    apt: 
+      name: rabbitmq-server
+      state: latest
+      update_cache: yes

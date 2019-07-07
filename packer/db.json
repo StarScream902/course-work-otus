@@ -11,8 +11,8 @@
         {
             "type": "googlecompute",
             "project_id": "{{user `project_id`}}",
-            "image_name": "app-{{timestamp}}",
-            "image_family": "app",
+            "image_name": "db-{{timestamp}}",
+            "image_family": "db",
             "source_image_family": "{{user `source_image_family`}}",
             "zone": "{{user `zone`}}",
             "ssh_username": "{{user `ssh_username`}}",
@@ -22,14 +22,12 @@
 
     "provisioners": [
         {
-            "type": "shell",
-            "script": "scripts/install_mongodb.sh",
-            "execute_command": "sudo {{.Path}}"
+            "type": "ansible",
+            "playbook_file": "../ansible/playbooks/install-mongodb.yml"
         },
         {
-            "type": "shell",
-            "script": "scripts/install_rabbitmq.sh",
-            "execute_command": "sudo {{.Path}}"
+            "type": "ansible",
+            "playbook_file": "../ansible/playbooks/install-rabbitmq.yml"
         }
     ]
 }
