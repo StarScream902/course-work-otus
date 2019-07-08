@@ -1,3 +1,7 @@
+variable env {
+  description = "environment"
+}
+
 variable region {
   description = "Region"
   default = "us-east4"

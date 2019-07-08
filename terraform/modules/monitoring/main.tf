@@ -1,5 +1,5 @@
 resource "google_compute_instance" "monitoring" {
-  name         = "monitoring"
+  name         = "${var.env}-monitoring"
   machine_type = "g1-small"
   zone         = "${var.zone}"
   tags         = ["monitoring","prometheus","grafana"]

@@ -14,6 +14,7 @@ provider "google" {
 
 module "db" {
   source            = "../modules/db"
+  env               = "stage"
   public_key_path   = "${var.public_key_path}"
   zone              = "${var.zone}"
   db_disk_image     = "${var.db_disk_image}"
@@ -23,6 +24,7 @@ module "db" {
 
 module "monitoring" {
   source            = "../modules/monitoring"
+  env               = "stage"
   public_key_path   = "${var.public_key_path}"
   zone              = "${var.zone}"
   docker_disk_image = "${var.docker_disk_image}"

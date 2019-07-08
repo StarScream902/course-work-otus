@@ -1,5 +1,5 @@
 resource "google_compute_instance" "db" {
-  name         = "db"
+  name         = "${var.env}-db"
   machine_type = "g1-small"
   zone         = "${var.zone}"
   tags         = ["db","mongodb","rabbitmq"]
