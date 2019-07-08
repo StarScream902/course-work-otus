@@ -1,3 +1,8 @@
+terraform {
+  # Версия terraform  
+  required_version = ">=0.11,<0.12"
+}
+
 provider "google" {
   project     = "course-work-otus"
   region      = "us-east4"
