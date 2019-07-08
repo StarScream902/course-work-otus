@@ -1,0 +1,8 @@
+project = "course-work-otus"
+region = "us-east4"
+zone = "us-east4-c"
+public_key_path = "~/.ssh/r2d2.pub"
+private_key_path = "~/.ssh/r2d2"
+db_disk_image = "db"
+docker_disk_image = "docker"
+ssh_user = "r2d2"
