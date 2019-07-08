@@ -11,8 +11,8 @@
         {
             "type": "googlecompute",
             "project_id": "{{user `project_id`}}",
-            "image_name": "gitlab-{{timestamp}}",
-            "image_family": "gitlab",
+            "image_name": "docker-{{timestamp}}",
+            "image_family": "docker",
             "source_image_family": "{{user `source_image_family`}}",
             "zone": "{{user `zone`}}",
             "ssh_username": "{{user `ssh_username`}}",
@@ -21,6 +21,15 @@
     ],
 
     "provisioners": [
-
+        {
+            "type": "shell",
+            "script": "scripts/install_docker.sh",
+            "execute_command": "sudo {{.Path}}"
+        },
+        {
+            "type": "shell",
+            "script": "scripts/install_docker-compose.sh",
+            "execute_command": "sudo {{.Path}}"
+        }
     ]
 }
