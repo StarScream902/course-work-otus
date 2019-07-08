@@ -13,23 +13,41 @@ provider "google" {
   region = "${var.region}"
 }
 
-module "ui" {
-  source = "../modules/ui"
+resource "google_compute_instance" "app" {
+  name         = "course-work-otus"
+  machine_type = "g1-small"
+  zone         = "europe-west1-b"
 
-  public_key_path = "${var.public_key_path}"
+  # определение загрузочного диска
+  boot_disk {
+    initialize_params {
+      image = "app-base"
+    }
+  }
 
-  zone = "${var.zone}"
+  metadata {
+    ssh-keys = "r2d2:${file("~/.ssh/r2d2.pub")}"
+  }
 
-  app_disk_image = "${var.app_disk_image}"
+  # определение сетевого интерфейса
+  network_interface {
+    # сеть, к которой присоединить данный интерфейс
+    network = "default"
+
+    # использовать ephemeral IP для доступа из Интернет
+    access_config {}
+  }
+
+  connection {
+    type        = "ssh"
+    user        = "r2d2"
+    agent       = false
+    private_key = "${file("~/.ssh/r2d2")}"
+  }
+
+  provisioner "remote-exec" {
+    script = "files/deploy.sh"
+  }
 }
 
-module "crawler" {
-  source        = "../modules/crawler"
-  
-  public_key_path = "${var.public_key_path}"
 
-  zone = "${var.zone}"
-
-  app_disk_image = "${var.app_disk_image}"
-
-}
