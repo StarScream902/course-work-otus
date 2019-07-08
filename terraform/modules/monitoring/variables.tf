@@ -12,7 +12,7 @@ variable zone {
   default = "us-east4-c"
 }
 
-variable db_disk_image {
+variable docker_disk_image {
   description = "Disk image"
 }
 

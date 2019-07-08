@@ -1,12 +1,12 @@
-resource "google_compute_instance" "db" {
-  name         = "${var.env}-db"
+resource "google_compute_instance" "monitoring" {
+  name         = "${var.env}-monitoring"
   machine_type = "g1-small"
   zone         = "${var.zone}"
-  tags         = ["db","mongodb","rabbitmq"]
+  tags         = ["monitoring","prometheus","grafana"]
 
   boot_disk {
     initialize_params {
-      image = "${var.db_disk_image}"
+      image = "${var.docker_disk_image}"
     }
   }
 
@@ -28,26 +28,26 @@ resource "google_compute_instance" "db" {
 }
 
 # Правило firewall
-resource "google_compute_firewall" "firewall_mongodb" {
-  name    = "allow-mongodb-default"
+resource "google_compute_firewall" "firewall_prometheus" {
+  name    = "allow-prometheus-default"
   network = "default"
 
   allow {
     protocol = "tcp"
-    ports    = ["27017"]
+    ports    = ["9090"]
   }
 
-  target_tags = ["mongodb"]
+  target_tags = ["prometheus"]
 }
 
-resource "google_compute_firewall" "firewall_rabbitmq" {
-  name    = "allow-rabbitmq-default"
+resource "google_compute_firewall" "firewall_grafana" {
+  name    = "allow-grafana-default"
   network = "default"
 
   allow {
     protocol = "tcp"
-    ports    = ["5672"]
+    ports    = ["3000"]
   }
 
-  target_tags = ["rabbitmq"]
+  target_tags = ["grafana"]
 }
