@@ -1,10 +1,13 @@
-Общая структура проекта
+# Общая структура проекта
 
-Типы виртуальных машин:
-  DB (MongoDB/RabbitMQ)
-  APP (UI/Crawler)
-  GitLab (Server/Runner)
-  Monitoring (Prometheus)
+## Типы виртуальных машин:
+  
+- DB (MongoDB/RabbitMQ)
+- APP (UI/Crawler)
+- GitLab (Server/Runner)
+- Monitoring (Prometheus)
+
+# Описание
 
 Будет 2е среды, Stage - для разработки и Prod - для продуктивной среды
 
