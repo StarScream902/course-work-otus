@@ -1,0 +1,7 @@
+---
+- name: Manage RabbitMQ
+  hosts: db
+  become: yes
+
+  roles:
+   - tanadeau.ansible_role_rabbitmq
