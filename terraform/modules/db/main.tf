@@ -46,7 +46,7 @@ resource "google_compute_firewall" "firewall_rabbitmq" {
 
   allow {
     protocol = "tcp"
-    ports    = ["5672"]
+    ports    = ["5672","15672"]
   }
 
   target_tags = ["rabbitmq"]
