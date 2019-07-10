@@ -1,2 +1,5 @@
 - src: tanadeau.ansible_role_rabbitmq
   version: v1.0.4
+
+- src: undergreen.mongodb
+  version: v2.6.0
