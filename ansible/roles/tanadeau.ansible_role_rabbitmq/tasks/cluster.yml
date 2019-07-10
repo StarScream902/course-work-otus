@@ -1,0 +1,22 @@
+---
+- name: stop rabbitmq app
+  command: rabbitmqctl stop_app
+
+- name: reset rabbitmq on non-master node
+  command: rabbitmqctl reset
+
+- name: join rabbitmq cluster
+  command: "rabbitmqctl join_cluster {{ rabbitmq_cluster_master }}"
+  register: rabbitmq_output
+  ignore_errors: true
+
+- name: ensure rabbitmq cluster member
+  fail:
+    msg: "Unable to join the cluster."
+  when: ("'already_member' not in rabbitmq_output.stderr") and rabbitmq_output.rc != 0
+
+- name: start rabbitmq app
+  command: rabbitmqctl start_app
+
+- name: Configure HA policy
+  command: rabbitmqctl set_policy ha-all "." '{"ha-mode":"all"}'
