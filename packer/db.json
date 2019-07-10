@@ -28,6 +28,11 @@
         {
             "type": "ansible",
             "playbook_file": "../ansible/playbooks/install-rabbitmq.yml"
+        },
+        {
+            "type": "shell",
+            "script": "scripts/install_pip3.sh",
+            "execute_command": "sudo {{.Path}}"
         }
     ]
 }
