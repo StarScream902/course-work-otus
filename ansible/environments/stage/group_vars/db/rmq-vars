@@ -1,0 +1,4 @@
+rabbitmq_version: '3.7.16-1'
+
+rabbitmq_plugins:
+  - rabbitmq_management
