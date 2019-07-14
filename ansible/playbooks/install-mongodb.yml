@@ -26,6 +26,6 @@
   - name: Install mongo
     sudo: yes
     apt: 
-      name: mongodb-org
-      state: latest
+      name: 'mongodb-org=4.0.10'
+      state: present
       update_cache: yes
