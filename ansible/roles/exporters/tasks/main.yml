@@ -2,18 +2,19 @@
 # tasks file for exporters
 
 - name: debug
-  apt:
-    
+  debug:
+    msg: "{% if 'db' in group_names %} group_names={{group_names}}  host_ip={{ansible_default_ipv4.address}} {% endif %}"
+
+- name: Creating the directory for docker-compose dirs
+  file:
+    state: directory
+    recurse: yes
+    path: /opt/docker/
+    mode: '2775'
+    owner: r2d2
+    group: r2d2
+  become: true
 
 - name: install mongodb-exporter
-  docker_compose:
-    project_name: exporters
-    definition:
-      mongodb-exporter:
-        container_name: mongodb-exporter
-        image: xendera/mongodb-exporter
-        ports:
-          - 9216:9216
-        environment:
-          - MONGODB_URL=mongodb://{{ansible_default_ipv4.address}}
+  include_tasks: db.yml
   when: "'db' in group_names"

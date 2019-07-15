@@ -37,3 +37,6 @@ grafana_dashboards:
   - dashboard_id: 1860
     revision_id: 14
     datasource: prometheus
+  - dashboard_id: 2583
+    revision_id: 1
+    datasource: prometheus
