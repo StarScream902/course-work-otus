@@ -1,0 +1,19 @@
+---
+# tasks file for exporters
+
+- name: debug
+  apt:
+    
+
+- name: install mongodb-exporter
+  docker_compose:
+    project_name: exporters
+    definition:
+      mongodb-exporter:
+        container_name: mongodb-exporter
+        image: xendera/mongodb-exporter
+        ports:
+          - 9216:9216
+        environment:
+          - MONGODB_URL=mongodb://{{ansible_default_ipv4.address}}
+  when: "'db' in group_names"

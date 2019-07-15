@@ -1,0 +1,7 @@
+---
+- name: install and manage grafana
+  hosts: monitoring
+  become: true
+
+  roles:
+  - cloudalchemy.grafana
