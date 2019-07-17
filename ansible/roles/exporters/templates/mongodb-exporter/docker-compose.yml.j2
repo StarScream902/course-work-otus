@@ -3,8 +3,8 @@ version: '3.4'
 services:
   mongodb-exporter:
     container_name: mongodb-exporter
-    image: xendera/mongodb-exporter
+    image: starscream902/dcu-mongodb-exporter
     ports:
-        - 9216:9216
+        - 9216:9001
     environment:
         - MONGODB_URL=mongodb://{{ansible_default_ipv4.address}}
