@@ -36,3 +36,14 @@ module "vpc" {
   source            = "../modules/vpc"
   source_ranges     = ["0.0.0.0/0"]
 }
+
+module "app" {
+  source            = "../modules/app"
+  env               = "stage"
+  public_key_path   = "${var.public_key_path}"
+  zone              = "${var.zone}"
+  docker_disk_image = "${var.docker_disk_image}"
+  ssh_user          = "${var.ssh_user}"
+  private_key_path  = "${var.private_key_path}"
+}
+
