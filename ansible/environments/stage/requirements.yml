@@ -3,3 +3,12 @@
 
 - src: undergreen.mongodb
   version: v2.6.0
+
+- src: cloudalchemy.prometheus
+  version: 2.9.2
+
+- src: cloudalchemy.grafana
+  version: 0.14.2
+
+- src: cloudalchemy.node-exporter
+  version: 0.14.0

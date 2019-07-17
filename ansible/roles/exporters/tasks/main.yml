@@ -1,0 +1,20 @@
+---
+# tasks file for exporters
+
+- name: debug
+  debug:
+    msg: "{% if 'db' in group_names %} group_names={{group_names}}  host_ip={{ansible_default_ipv4.address}} {% endif %}"
+
+- name: Creating the directory for docker-compose dirs
+  file:
+    state: directory
+    recurse: yes
+    path: /opt/docker/
+    mode: '2775'
+    owner: r2d2
+    group: r2d2
+  become: true
+
+- name: install mongodb-exporter
+  include_tasks: db.yml
+  when: "'db' in group_names"

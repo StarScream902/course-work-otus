@@ -1,0 +1,10 @@
+version: '3.4'
+
+services:
+  mongodb-exporter:
+    container_name: mongodb-exporter
+    image: xendera/mongodb-exporter
+    ports:
+        - 9216:9216
+    environment:
+        - MONGODB_URL=mongodb://{{ansible_default_ipv4.address}}

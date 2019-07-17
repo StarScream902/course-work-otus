@@ -1,0 +1,22 @@
+- name: Creating the mongodb-exporter directory for docker-compose file
+  file:
+    state: directory
+    recurse: yes
+    path: /opt/docker/mongodb-exporter/
+
+- name: Create docker-compose file for mongodb-exporter
+  template:
+    src: mongodb-exporter/docker-compose.yml.j2
+    dest: /opt/docker/mongodb-exporter/docker-compose.yml
+  register: result
+
+- name: 
+  shell: "docker-compose up -d"
+  args:
+    chdir: /opt/docker/mongodb-exporter/
+  when: result.changed == true
+  register: result
+
+- name: debug
+  debug:
+    var: result

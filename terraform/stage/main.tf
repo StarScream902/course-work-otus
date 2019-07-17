@@ -31,3 +31,8 @@ module "monitoring" {
   ssh_user          = "${var.ssh_user}"
   private_key_path  = "${var.private_key_path}"
 }
+
+module "vpc" {
+  source            = "../modules/vpc"
+  source_ranges     = ["0.0.0.0/0"]
+}

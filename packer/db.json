@@ -22,6 +22,16 @@
 
     "provisioners": [
         {
+            "type": "shell",
+            "script": "scripts/install_docker.sh",
+            "execute_command": "sudo {{.Path}}"
+        },
+        {
+            "type": "shell",
+            "script": "scripts/install_docker-compose.sh",
+            "execute_command": "sudo {{.Path}}"
+        },
+        {
             "type": "ansible",
             "playbook_file": "../ansible/playbooks/install-mongodb.yml"
         },

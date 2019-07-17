@@ -1,0 +1,7 @@
+---
+- name: install and manage node-exporter
+  hosts: all
+  become: true
+
+  roles:
+  - cloudalchemy.node-exporter
