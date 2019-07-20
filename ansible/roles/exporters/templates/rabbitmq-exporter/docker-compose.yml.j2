@@ -1,0 +1,13 @@
+version: '3.4'
+
+services:
+  rabbitmq-exporter:
+    container_name: rabbitmq-exporter
+    image: kbudde/rabbitmq-exporter
+    ports:
+      - 9419:9419
+    environment:
+      - RABBIT_URL=http://{{ansible_default_ipv4.address}}:15672
+      - RABBIT_USER={{rabbitmq_users[0].user}}
+      - RABBIT_PASSWORD={{rabbitmq_users[0].password}}
+      - MAX_QUEUES=0

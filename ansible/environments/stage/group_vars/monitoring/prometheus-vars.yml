@@ -33,3 +33,7 @@ prometheus_scrape_configs:
     static_configs:
       - targets:
         - "10.150.0.27:9216"
+  - job_name: 'rabbitmq-exporter-db'
+    static_configs:
+      - targets:
+        - "10.150.0.27:9419"
