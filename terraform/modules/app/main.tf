@@ -19,11 +19,12 @@ resource "google_compute_instance" "app" {
     ssh-keys = "r2d2:${file(var.public_key_path)}"
   }
 
-  connection {
+	connection {
     type  = "ssh"
-    user  = "${var.ssh_user}"
-    agent = false
-  }
+	  user  = "${var.ssh_user}"
+	  agent = false
+	  private_key = "${file(var.private_key_path)}"
+	}
 }
 
 # Правило firewall
