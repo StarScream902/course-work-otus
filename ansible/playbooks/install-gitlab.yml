@@ -1,7 +1,15 @@
 ---
 - name: Install GitLab
-  hosts: gitlub
+  hosts: gitlab
   become: true
 
-  roles:
-    - name-role
+  tasks:
+
+  - name: Copy compose file
+    copy:
+      src: ../files/docker-compose.yml
+      dest: /home/r2d2
+
+  - name: Docker compose up
+    shell: cd /home/r2d2 && docker-compose up -d
+

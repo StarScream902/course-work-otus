@@ -1,7 +1,3 @@
-variable env {
-  description = "environment"
-}
-
 variable region {
   description = "Region"
   default = "us-east4"
@@ -27,4 +23,8 @@ variable "ssh_user" {
 
 variable private_key_path {
   description = "Path to the private key used for ssh access"
+}
+
+variable project {
+  description = "Name of project"
 }

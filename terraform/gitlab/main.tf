@@ -1,5 +1,19 @@
+terraform {
+  # Версия terraform  
+  required_version = ">=0.11,<0.12"
+}
+
+provider "google" {
+  # Версия провайдера  
+  version = "2.0.0"
+
+  # ID проекта  
+  project = "${var.project}"
+  region = "${var.region}"
+}
+
 resource "google_compute_instance" "gitlab" {
-  name         = "${var.env}-gitlab"
+  name         = "gitlab"
   machine_type = "n1-standard-1"
   zone         = "${var.zone}"
   tags         = ["gitlab"]
@@ -34,7 +48,7 @@ resource "google_compute_firewall" "firewall_gitlab" {
 
   allow {
     protocol = "tcp"
-    ports    = ["443"]
+    ports    = ["443","80"]
   }
 
   target_tags = ["gitlab"]
