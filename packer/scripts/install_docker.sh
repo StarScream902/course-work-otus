@@ -23,3 +23,5 @@ apt-get update
 apt-get install -y docker-ce docker-ce-cli containerd.io
 
 docker version
+
+usermod -aG docker r2d2
