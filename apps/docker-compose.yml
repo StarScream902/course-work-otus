@@ -1,0 +1,56 @@
+version: '3.4'
+
+services:
+
+  crawler:
+    image: crawler
+    build: ./search_engine_crawler/
+    environment:
+     - MONGO=${MONGO}
+     - MONGO_PORT=${MONGO_PORT}
+     - RMQ_HOST=${RMQ_HOST}
+     - RMQ_QUEUE=${RMQ_QUEUE}
+     - RMQ_USERNAME=${RABBITMQ_DEFAULT_USER}
+     - RMQ_PASSWORD=${RABBITMQ_DEFAULT_PASS}
+     - CHECK_INTERVAL=${CHECK_INTERVAL}
+     - URL=https://vitkhab.github.io/search_engine_test_site/
+     - EXCLUDE_URLS='.*github.com'
+    ports:
+      - 8001:8000
+    # command: sleep 999999
+    command: python -u crawler/crawler.py https://vitkhab.github.io/search_engine_test_site/
+    depends_on: 
+      - rabbit
+      - mongo
+    
+  ui:
+    image: ui
+    build: ./search_engine_ui/
+    environment:
+     - MONGO=${MONGO}
+     - MONGO_PORT=${MONGO_PORT}
+    ports:
+      - 8000:8000
+    command: [ "./docker-entrypoint.sh" ]
+    depends_on:
+      - mongo
+      - crawler
+
+  rabbit:
+    image: rabbitmq:3.6-management-alpine
+    hostname: rabbit_server
+    restart: on-failure
+    environment:
+      - RABBITMQ_DEFAULT_USER=${RABBITMQ_DEFAULT_USER}
+      - RABBITMQ_DEFAULT_PASS=${RABBITMQ_DEFAULT_PASS}
+    ports:
+      - 15672:15672
+    ulimits:
+      nofile:
+        soft: 64000
+        hard: 64000
+
+  mongo:
+    image: percona/percona-server-mongodb:4.0.9
+    restart: on-failure
+    command: "--port 27017"
