@@ -34,7 +34,7 @@ resource "google_compute_firewall" "firewall_ui" {
 
   allow {
     protocol = "tcp"
-    ports    = ["443"]
+    ports    = ["8000"]
   }
 
   target_tags = ["ui"]
@@ -46,7 +46,7 @@ resource "google_compute_firewall" "firewall_crawler" {
 
   allow {
     protocol = "tcp"
-    ports    = ["443"]
+    ports    = ["8001"]
   }
 
   target_tags = ["crawler"]
