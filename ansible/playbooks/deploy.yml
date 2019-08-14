@@ -3,7 +3,6 @@
   hosts: app
   become: true
 
-
   roles:
   - deploy
 
