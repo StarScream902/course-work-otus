@@ -1,0 +1,14 @@
+version: '3.4'
+
+services:
+
+  ui:
+    image: starscream902/search-engine-ui:{{ ui_tag  }}
+    build: ./search_engine_ui/
+    environment:
+     - MONGO=${MONGO}
+     - MONGO_PORT=${MONGO_PORT}
+    ports:
+      - 8000:8000
+    command: [ "./docker-entrypoint.sh" ]
+

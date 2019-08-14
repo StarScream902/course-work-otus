@@ -1,0 +1,9 @@
+---
+- name: Deploy
+  hosts: stage-app
+  become: true
+
+
+  roles:
+  - deploy
+
