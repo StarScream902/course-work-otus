@@ -6,13 +6,13 @@ services:
     image: starscream902/crawler:{{ CI_PIPELINE_ID  }}
     build: ./search_engine_crawler/
     environment:
-     - MONGO=${MONGO}
-     - MONGO_PORT=${MONGO_PORT}
-     - RMQ_HOST=${RMQ_HOST}
-     - RMQ_QUEUE=${RMQ_QUEUE}
-     - RMQ_USERNAME=${RABBITMQ_DEFAULT_USER}
-     - RMQ_PASSWORD=${RABBITMQ_DEFAULT_PASS}
-     - CHECK_INTERVAL=${CHECK_INTERVAL}
+     - MONGO={{MONGO}}
+     - MONGO_PORT={{MONGO_PORT}}
+     - RMQ_HOST={{RMQ_HOST}}
+     - RMQ_QUEUE={{RMQ_QUEUE}}
+     - RMQ_USERNAME={{RABBITMQ_DEFAULT_USER}}
+     - RMQ_PASSWORD={{RABBITMQ_DEFAULT_PASS}}
+     - CHECK_INTERVAL={{CHECK_INTERVAL}}
      - URL=https://vitkhab.github.io/search_engine_test_site/
      - EXCLUDE_URLS='.*github.com'
     ports:

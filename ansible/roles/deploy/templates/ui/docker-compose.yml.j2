@@ -6,8 +6,8 @@ services:
     image: starscream902/search-engine-ui:{{ CI_PIPELINE_ID  }}
     build: ./search_engine_ui/
     environment:
-     - MONGO=${MONGO}
-     - MONGO_PORT=${MONGO_PORT}
+     - MONGO={{MONGO}}
+     - MONGO_PORT={{MONGO_PORT}}
     ports:
       - 8000:8000
     command: [ "./docker-entrypoint.sh" ]
