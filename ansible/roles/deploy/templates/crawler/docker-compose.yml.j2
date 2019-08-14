@@ -4,7 +4,6 @@ services:
 
   crawler:
     image: starscream902/crawler:{{ CI_PIPELINE_ID  }}
-    build: ./search_engine_crawler/
     environment:
      - MONGO={{MONGO}}
      - MONGO_PORT={{MONGO_PORT}}
