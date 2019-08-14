@@ -1,7 +1,5 @@
 ---
 # tasks file for deploy
 name: Deploy
-hosts: app
-become: true
 
 include: {{ app }}
