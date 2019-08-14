@@ -1,14 +1,14 @@
 ---
 # tasks file for deploy
 name: Deploy ui
-hosts: stage-app
+hosts: app
 become: true
 
 tasks:
 
   - name: Copy compose file
     copy:
-      src: files/ui/docker-compose.yml
+      src: ui/docker-compose.yml
       dest: /home/r2d2/ui
 
   - name: Docker compose up

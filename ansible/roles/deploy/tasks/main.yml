@@ -1,7 +1,7 @@
 ---
 # tasks file for deploy
 name: Deploy
-hosts: stage-app
+hosts: app
 become: true
 
 tasks:

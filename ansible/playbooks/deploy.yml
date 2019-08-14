@@ -1,6 +1,6 @@
 ---
 - name: Deploy
-  hosts: stage-app
+  hosts: app
   become: true
 
 

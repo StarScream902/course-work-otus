@@ -1,14 +1,14 @@
 ---
 # tasks file for deploy
 name: Deploy crawler
-hosts: stage-app
+hosts: app
 become: true
 
 tasks:
 
   - name: Copy compose file
     copy:
-      src: files/crawler/docker-compose.yml
+      src: crawler/docker-compose.yml
       dest: /home/r2d2/crawler
 
   - name: Docker compose up
