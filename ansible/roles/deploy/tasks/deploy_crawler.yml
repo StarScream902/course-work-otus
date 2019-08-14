@@ -1,6 +1,13 @@
 ---
 # tasks file for deploy
 
+- name: Create directory
+  file:
+    state: directory
+    path: /home/r2d2/crawler/
+    owner: r2d2
+    group: r2d2   
+
 - name: Copy compose file
   template:
     src: crawler/docker-compose.yml.j2
