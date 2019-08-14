@@ -3,7 +3,7 @@ version: '3.4'
 services:
 
   crawler:
-    image: starscream902/crawler:{{ CI_PIPELINE_ID  }}
+    image: starscream902/search-engine-crawler:{{ CI_PIPELINE_ID  }}
     environment:
      - MONGO={{MONGO}}
      - MONGO_PORT={{MONGO_PORT}}
