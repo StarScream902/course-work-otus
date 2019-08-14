@@ -1,0 +1,9 @@
+---
+- name: Deploy
+  hosts: app
+  become: true
+
+
+  roles:
+  - deploy
+

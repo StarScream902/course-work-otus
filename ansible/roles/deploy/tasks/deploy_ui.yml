@@ -1,0 +1,17 @@
+---
+# tasks file for deploy
+
+- name: Create directory
+  file:
+    state: directory
+    path: /home/r2d2/ui/
+    owner: r2d2
+    group: r2d2
+
+- name: Copy compose file
+  template:
+    src: ui/docker-compose.yml.j2
+    dest: /home/r2d2/ui/docker-compose.yml
+
+- name: Docker compose up
+  shell: cd /home/r2d2/ui && docker-compose up -d
