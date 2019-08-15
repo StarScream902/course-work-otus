@@ -1,0 +1,61 @@
+stages:
+  - build
+  - test
+  - push-to-registry
+  - stage
+  - prod
+
+build:
+  stage: build
+  when: manual
+  script:
+    - docker build -t starscream902/search-engine-ui:$CI_PIPELINE_ID .
+
+test:
+  stage: test
+  when: manual
+  script:
+    - docker run --rm starscream902/search-engine-ui:$CI_PIPELINE_ID ./run-test.sh
+
+push:
+  stage: push-to-registry
+  when: manual
+  script:
+    - docker login -u $docker_registry_user -p $docker_registry_password
+    - docker push starscream902/search-engine-ui:$CI_PIPELINE_ID
+    - docker logout
+
+deploy-to-stage:
+  before_script:
+    - 'which ssh-agent || ( apt-get update -y && apt-get install openssh-client -y )'
+    - eval $(ssh-agent -s)
+    - ssh-add <(echo "$SSH_PRIVATE_KEY")
+    - mkdir -p ~/.ssh
+    - chmod 700 ~/.ssh
+  stage: stage
+  when: manual
+  script:
+    - ssh -oStrictHostKeyChecking=no r2d2@gitlab "cd ~/course-work-otus/ansible;
+      git pull origin master;
+      ansible-playbook -i ./environments/stage/inventory ./playbooks/deploy.yml -e \"app=ui CI_PIPELINE_ID=$CI_PIPELINE_ID\""
+  environment:
+    name: stage
+    url: http://$STAGE_URL:8000
+
+deploy-to-prod:
+  before_script:
+    - 'which ssh-agent || ( apt-get update -y && apt-get install openssh-client -y )'
+    - eval $(ssh-agent -s)
+    - ssh-add <(echo "$SSH_PRIVATE_KEY")
+    - mkdir -p ~/.ssh
+    - chmod 700 ~/.ssh
+  stage: prod
+  when: manual
+  script:
+    - ssh -oStrictHostKeyChecking=no r2d2@gitlab "cd ~/course-work-otus/ansible;
+      git pull origin master;
+      ansible-playbook -i ./environments/prod/inventory ./playbooks/deploy.yml -e \"app=ui CI_PIPELINE_ID=$CI_PIPELINE_ID\""
+  environment:
+    name: prod
+    url: http://$PROD_URL:8000
+
