@@ -5,7 +5,7 @@
     state: directory
     path: '/home/r2d2/{{app}}/'
     owner: r2d2
-    group: r2d2   
+    group: r2d2
 
 - name: Copy compose file
   template:
